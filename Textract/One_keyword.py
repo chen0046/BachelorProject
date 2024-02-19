@@ -14,7 +14,7 @@ def count_keyword_in_file(file_path, keyword):
     return keyword_count
 
 # Example usage
-file_path = '/Users/alexsolomon/Desktop/Bachelor/BachelorProject/Textract/test.pdf'  # Change this to the path of your file
+file_path = '/Users/chenxi/Desktop/Projekt/test.pdf'  # Change this to the path of your file
 keyword = 'medicine'
 count = count_keyword_in_file(file_path, keyword)
 print(f"The keyword '{keyword}' appears {count} times in the document.")
