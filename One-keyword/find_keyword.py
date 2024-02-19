@@ -26,6 +26,6 @@ def find_keyword_in_docx(file_path, keyword):
 
 # Example usage
 file_path = '/Users/alexsolomon/Desktop/Bachelor/Medicine.docx'
-keyword = 'time'
+keyword = 'medicine'
 find_keyword_in_docx(file_path, keyword)
 
