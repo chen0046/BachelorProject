@@ -19,7 +19,7 @@ def count_keywords_in_file(file_path, keywords):
     return keyword_counts
 
 # Example usage
-file_path = '/Users/chenxi/Desktop/Projekt/Textract/medicalexam.pdf'  # Replace with your file path
+file_path = '/Users/chenxi/Desktop/Projekt/Textract/tests11/test22/Book2.xlsx'  # Replace with your file path
 keywords = ['medicine', 'health', 'treatment']  # List your keywords here
 counts = count_keywords_in_file(file_path, keywords)
 
