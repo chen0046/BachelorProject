@@ -18,7 +18,7 @@ token_response = requests.post(token_url, data=token_data)
 access_token = token_response.json()['access_token']
 
 # Definer søgeanmodningen
-search_query = 'chen'  # Erstat dette med det ord, du vil søge efter
+search_query = 'will'  # Erstat dette med det ord, du vil søge efter
 search_url = f'https://graph.microsoft.com/v1.0/sites/{site_id}/drive/root/search(q=\'{search_query}\')'
 
 # Udfør søgeanmodningen
