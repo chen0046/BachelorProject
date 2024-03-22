@@ -24,7 +24,7 @@ def search_file(keyword, file_content):
     return keyword.lower() in file_content.lower()
 
 # Keywords to search for
-keywords = ["medicine", "dinsite"]
+keywords = ["minsite", "dinsite"]
 
 # Headers for Graph API requests
 headers = {
