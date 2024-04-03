@@ -1,6 +1,7 @@
 import requests
 from msal import ConfidentialClientApplication
 import json
+import time
 
 # Azure AD app credentials
 client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
@@ -14,32 +15,9 @@ app = ConfidentialClientApplication(
     authority=authority,
     client_credential=client_secret
 )
-result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
-access_token = result['access_token']
 
 # Keywords to search for
 keywords = ["minsite", "dinsite"]
-
-# Function to get site owner's email
-def get_site_owner_email(site_id, access_token):
-    headers = {
-        'Authorization': 'Bearer ' + access_token,
-        'Content-Type': 'application/json'
-    }
-    site_url = f"https://graph.microsoft.com/v1.0/sites/{site_id}"
-    response = requests.get(site_url, headers=headers)
-    site_info = response.json()
-    owner_email = None
-    if 'siteCollection' in site_info and 'owner' in site_info['siteCollection']:
-        owner = site_info['siteCollection']['owner']
-        owner_id = owner.get('user', {}).get('id')
-        if owner_id:
-            owner_info_url = f"https://graph.microsoft.com/v1.0/users/{owner_id}"
-            owner_response = requests.get(owner_info_url, headers=headers)
-            owner_info = owner_response.json()
-            if 'mail' in owner_info:
-                owner_email = owner_info['mail']
-    return owner_email
 
 # Function to search for files and collect information
 def search_files_and_collect_info(keyword, access_token):
@@ -55,7 +33,6 @@ def search_files_and_collect_info(keyword, access_token):
 
     for site in sites:
         site_id = site['id']
-        site_owner_email = get_site_owner_email(site_id, access_token)
         files_url = f"https://graph.microsoft.com/v1.0/sites/{site_id}/drive/root/search(q='{keyword}')"
         response = requests.get(files_url, headers=headers)
         files = response.json()['value']
@@ -65,7 +42,6 @@ def search_files_and_collect_info(keyword, access_token):
                 "file_name": file['name'],
                 "file_url": file['webUrl'],
                 "site_id": site_id,
-                "site_owner_email": site_owner_email,  # Add site owner's email
                 "users_with_access": [],  # Initialize list to store users with access
                 "owner_email": None  # Initialize owner's email
             }
@@ -81,14 +57,8 @@ def search_files_and_collect_info(keyword, access_token):
                         if 'email' in user:
                             file_info["users_with_access"].append(user['email'])
             # Get owner's email
-            if 'createdBy' in file:
-                creator = file['createdBy']
-                creator_info_url = creator.get('user', {}).get('@odata.id')
-                if creator_info_url:
-                    creator_response = requests.get(creator_info_url, headers=headers)
-                    creator_info = creator_response.json()
-                    if 'mail' in creator_info:
-                        file_info["owner_email"] = creator_info['mail']
+            if 'createdBy' in file and 'user' in file['createdBy'] and 'email' in file['createdBy']['user']:
+                file_info["owner_email"] = file['createdBy']['user']['email']
             files_info.append(file_info)
 
     return files_info
@@ -96,21 +66,25 @@ def search_files_and_collect_info(keyword, access_token):
 # List to store file information
 all_files_info = []
 
-# Search for files containing each keyword and collect information
-for keyword in keywords:
-    files_info = search_files_and_collect_info(keyword, access_token)
-    all_files_info.extend(files_info)
+# Loop to run the code 10 times and measure time
+total_execution_time = 0
+for i in range(10):
+    start_time = time.time()
+    
+    # Authenticate with Azure AD
+    result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.default"])
+    access_token = result['access_token']
+    
+    # Search for files containing each keyword and collect information
+    for keyword in keywords:
+        files_info = search_files_and_collect_info(keyword, access_token)
+        all_files_info.extend(files_info)
 
-# Write file information to a JSON file
-with open("files_info.json", "w") as json_file:
-    json.dump(all_files_info, json_file, indent=4)
 
-# Print file information and users with access
-for file_info in all_files_info:
-    print(f"File Name: {file_info['file_name']}")
-    print(f"File URL: {file_info['file_url']}")
-    print(f"Owner's Email: {file_info['owner_email']}")
-    print(f"Site Owner's Email: {file_info['site_owner_email']}")
-    print(f"Users with Access: {', '.join(file_info['users_with_access'])}\n")
+    execution_time = time.time() - start_time
+    total_execution_time += execution_time
+    print(f"Iteration {i+1} execution time: {execution_time} seconds")
 
-print("File information saved to files_info.json.")
+# Calculate and print average execution time
+average_execution_time = total_execution_time / 10
+print(f"Average execution time: {average_execution_time} seconds")
