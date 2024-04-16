@@ -49,7 +49,7 @@ users_data = response.json().get('value', [])
 user_map = {user.get('id'): user.get('displayName') for user in users_data}
 
 # Keywords to search for
-keywords = ["onedrive", "minsite"]
+keywords = ["indberetning","dog"]
 
 # Dictionary to store search results by user
 search_results = {}

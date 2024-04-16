@@ -6,7 +6,7 @@ import time
 client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
 client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
-keyword = 'minsite'
+keyword = 'indberetning'
 
 # Function to get access token
 def get_access_token():

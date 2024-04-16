@@ -7,7 +7,7 @@ client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
 
 # Define the keyword
-keyword = 'minsite'
+keyword = 'indberetning'
 
 # Get an access token
 token_url = f'https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token'

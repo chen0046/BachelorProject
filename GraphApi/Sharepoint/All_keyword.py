@@ -18,7 +18,7 @@ result = app.acquire_token_for_client(scopes=["https://graph.microsoft.com/.defa
 access_token = result['access_token']
 
 # Keywords to search for
-keywords = ["minsite", "dinsite"]
+keywords = ["dog","indberetning"]
 
 # Function to search for files and collect information
 def search_files_and_collect_info(keyword, access_token):

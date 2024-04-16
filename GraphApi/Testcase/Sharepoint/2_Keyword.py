@@ -17,7 +17,7 @@ app = ConfidentialClientApplication(
 )
 
 # Keywords to search for
-keywords = ["minsite", "dinsite"]
+keywords = ["Indberetning", "Joke"]
 
 # Function to search for files and collect information
 def search_files_and_collect_info(keyword, access_token):

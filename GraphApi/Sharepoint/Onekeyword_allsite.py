@@ -24,7 +24,7 @@ def search_file(keyword, file_content):
     return keyword.lower() in file_content.lower()
 
 # Keyword to search for
-keyword = "minsite"
+keyword = "Indberetning"
 
 # Headers for Graph API requests
 headers = {
