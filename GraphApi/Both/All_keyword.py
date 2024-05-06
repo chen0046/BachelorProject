@@ -1,13 +1,13 @@
 import requests
 import json
 
-# Replace these with your actual values
+
 client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
 client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
 
 # Define the keywords
-keywords = ['Joke', 'indberetning',"dog"]
+keywords = ['indberetning', 'lov', 'skema']
 
 # Get an access token
 token_url = f'https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token'
@@ -88,5 +88,5 @@ else:
     print('Request failed:', sites_response.text)
 
 # Write results to a JSON file
-with open('search_results.json', 'w') as json_file:
+with open('All_keyword_results.json', 'w') as json_file:
     json.dump(results, json_file, indent=4)
