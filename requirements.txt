@@ -1,3 +1,7 @@
 msal
 requests
 textract
+aiohttp
+asyncio
+aioresponses
+pytest
