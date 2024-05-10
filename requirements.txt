@@ -5,3 +5,5 @@ aiohttp
 asyncio
 aioresponses
 pytest
+python-docx
+coverage

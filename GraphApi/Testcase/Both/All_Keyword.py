@@ -8,7 +8,7 @@ client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
 
 # Define the keywords
-keywords = ['dog',"joke","will"]
+keywords = ['Bog', 'Flaske','vand','arm','bukser','hud','lege']
 
 # Get an access token
 token_url = f'https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token'
@@ -104,5 +104,5 @@ average_execution_time = sum(execution_times) / len(execution_times)
 print(f"Average execution time: {average_execution_time} seconds")
 
 # Write results to a JSON file
-with open('All_keyword_result', 'w') as json_file:
+with open('All_keyword_result.json', 'w') as json_file:
     json.dump(results, json_file, indent=4)

@@ -1,13 +1,16 @@
 import requests
 import json
 
+client_id = "969a50a3-b0ef-461a-a8e1-f5ffa99d9742"
+client_secret = "vnS8Q~zQVGohvtF3QSgmrFu9z8O4JxXnP6fTLbWX"
+tenant_id = "7ad74fff-48c1-4375-b52c-7e006726e7a4"
 
-client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
-client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
-tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
+#client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
+#client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
+#tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
 
 # Define the keywords
-keywords = ['indberetning', 'lov', 'skema']
+keywords = ['hud', 'lege', 'hej']
 
 # Get an access token
 token_url = f'https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token'

@@ -49,6 +49,7 @@ async def search_documents(session, access_token, headers):
                         })
     return results
 
+
 async def main():
     async with aiohttp.ClientSession() as session:
         access_token = await get_access_token(session)
@@ -62,3 +63,4 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
+
