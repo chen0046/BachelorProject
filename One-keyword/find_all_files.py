@@ -1,17 +1,3 @@
-"""In the provided code, the os module is used for interacting with the operating system. Here are the specific uses of the os module in the code:
-
-os.listdir(folder_path): This function returns a list containing the names of the entries in the given directory (folder_path). In the code, it's used to obtain a list of filenames in the specified folder.
-
-os.path.join(folder_path, filename): This function joins the specified paths intelligently. In the code, it's used to construct the full path of each document by combining the folder path and the filename obtained from os.listdir.
-
-filename.endswith('.docx'): This method checks if the filename ends with the specified suffix, in this case, '.docx'. It's used to filter out only the Word document files from the list of files in the folder.
-
-These os module functions and methods help in navigating the file system, constructing file paths, and filtering files based on their extensions. This allows the code to operate on all .docx files in a specified folder."""
-
-####################################################################################
-############### 1 word many documents ##############################################
-####################################################################################
-
 from docx import Document
 import os
 

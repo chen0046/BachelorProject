@@ -1,12 +1,12 @@
 import asyncio
 import aiohttp
 import json
-
+import time
 
 client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
 client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
-keywords = ['indberetning', 'lov', 'skema']
+keywords = ['Bog', 'Flaske','vand','arm','bukser','hud','lege']
 
 async def fetch(session, url, headers=None):
     async with session.get(url, headers=headers) as response:
@@ -49,17 +49,26 @@ async def search_documents(session, access_token, headers):
                         })
     return results
 
-
 async def main():
-    async with aiohttp.ClientSession() as session:
-        access_token = await get_access_token(session)
-        headers = {
-            'Authorization': f'Bearer {access_token}',
-            'Accept': 'application/json'
-        }
-        results = await search_documents(session, access_token, headers)
-        with open('search_results.json', 'w') as json_file:
-            json.dump(results, json_file, indent=4)
+    times = []
+    for i in range(10):
+        start_time = time.time()
+        async with aiohttp.ClientSession() as session:
+            access_token = await get_access_token(session)
+            headers = {
+                'Authorization': f'Bearer {access_token}',
+                'Accept': 'application/json'
+            }
+            results = await search_documents(session, access_token, headers)
+            with open(f'search_results_{i}.json', 'w') as json_file:
+                json.dump(results, json_file, indent=4)
+        end_time = time.time()
+        elapsed_time = end_time - start_time
+        times.append(elapsed_time)
+        print(f'Iteration {i+1} execution time: {elapsed_time:.6f} seconds')
+    
+    average_time = sum(times) / len(times)
+    print(f'Average execution time: {average_time:.6f} seconds')
 
 if __name__ == '__main__':
     asyncio.run(main())

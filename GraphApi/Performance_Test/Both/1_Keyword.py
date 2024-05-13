@@ -2,7 +2,7 @@ import requests
 import json
 import time
 
-# Replace these with your actual values
+# Paste the client_id, client_secret and tenant_id from Microsoft Azure: Azure AD app
 client_id = '1aa3b689-809c-4633-84c0-89422aa83a67'
 client_secret = 'pBp8Q~82oBux-P5zmIPgmbmkMlVEO~GtKDO6odh9'
 tenant_id = '08124b84-4f34-4bbe-91cc-cd51e0e0bbd9'
